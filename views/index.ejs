@@ -7,16 +7,20 @@
     <link rel="stylesheet" href="css/output.css" />
   </head>
   <body>
-    <div class="bg-cover h-screen bg-[url('/images/bgFields.jpeg')]">
-      <nav class="flex sticky p-4 items-center bg-slate-100 bg-opacity-50">
-        <div>
+    <div
+      class="flex absolute bg-cover h-full w-full bg-[url('/images/bgFields.jpeg')]"
+    >
+      <nav
+        class="flex absolute p-4 items-center bg-slate-100 bg-opacity-50 w-full"
+      >
+        <div class="flex w-20">
           <img
             class="h-12 w-12 rounded-full m-2"
             src="/images/cloud.jpg"
             alt="cloud"
           />
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center divide-violet-100 w-full">
           <form
             role="search"
             action="/find"
@@ -26,17 +30,31 @@
             <input
               type="text"
               placeholder="Search for an area..."
-              class="w-36 p-4 bg-slate-100"
+              class="w-36 p-4 bg-slate-100 outline-violet-200 rounded-l-xl"
             />
             <input
               type="submit"
-              class="cursor-pointer p-4 rounded-r-md hover:bg-slate-100"
+              class="cursor-pointer p-4 rounded-r-md transition-colors hover:bg-slate-100 bg-slate-50 bg-opacity-60"
             />
           </form>
-          <div class="flex items-center justify-center ml-80 space-x-14">
-            <button class="hover:bg-slate-100 p-5 rounded-xl">Home</button>
-            <button class="hover:bg-slate-100 p-5 rounded-xl">Dashboard</button>
-            <button class="hover:bg-slate-100 p-5 rounded-xl">Maps</button>
+          <div
+            class="flex absolute justify-center w-full space-x-4 divide-black pl-4"
+          >
+            <button
+              class="hover:bg-slate-100 p-5 transition-colors bg-slate-50 bg-opacity-60 rounded-xl"
+            >
+              Home
+            </button>
+            <button
+              class="hover:bg-slate-100 p-5 transition-colors bg-slate-50 bg-opacity-60 rounded-xl"
+            >
+              Dashboard
+            </button>
+            <button
+              class="hover:bg-slate-100 p-5 transition-colors bg-slate-50 bg-opacity-60 rounded-xl"
+            >
+              Maps
+            </button>
           </div>
         </div>
       </nav>
