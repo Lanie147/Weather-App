@@ -7,16 +7,39 @@
     <link rel="stylesheet" href="css/output.css" />
   </head>
   <body>
-    <div class="nav">
-      <div>
-        <ul
-          class="flex space-x-6 text-4xl text-center justify-center border-b-2 border-gray-500 pb-2"
-        >
-          <div class="p-2 hover:bg-blue-200">Home</div>
-          <div class="p-2 hover:bg-blue-200">Features</div>
-          <div class="p-2 hover:bg-blue-200">Pricings</div>
-        </ul>
-      </div>
+    <div class="bg-cover h-screen bg-[url('/images/bgFields.jpeg')]">
+      <nav class="flex sticky p-4 items-center bg-slate-100 bg-opacity-50">
+        <div>
+          <img
+            class="h-12 w-12 rounded-full m-2"
+            src="/images/cloud.jpg"
+            alt="cloud"
+          />
+        </div>
+        <div class="flex items-center">
+          <form
+            role="search"
+            action="/find"
+            method="get"
+            class="flex items-center"
+          >
+            <input
+              type="text"
+              placeholder="Search for an area..."
+              class="w-36 p-4 bg-slate-100"
+            />
+            <input
+              type="submit"
+              class="cursor-pointer p-4 rounded-r-md hover:bg-slate-100"
+            />
+          </form>
+          <div class="flex items-center justify-center ml-80 space-x-14">
+            <button class="hover:bg-slate-100 p-5 rounded-xl">Home</button>
+            <button class="hover:bg-slate-100 p-5 rounded-xl">Dashboard</button>
+            <button class="hover:bg-slate-100 p-5 rounded-xl">Maps</button>
+          </div>
+        </div>
+      </nav>
     </div>
   </body>
 </html>
