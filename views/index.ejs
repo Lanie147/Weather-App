@@ -1,63 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/output.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
   </head>
-  <body>
-    <div
-      class="flex absolute bg-cover h-full w-full bg-[url('/images/bgFields.jpeg')]"
-    >
-      <nav
-        class="flex absolute p-4 items-center bg-slate-100 bg-opacity-50 w-full"
-      >
-        <div class="flex w-20">
+  <body class="bg-[url('/images/bgFields.jpeg')] bg-cover bg-no-repeat">
+    <header class="bg-[#648499]">
+      <nav class="mx-auto flex w-[92%] items-center justify-between">
+        <div>
           <img
-            class="h-12 w-12 rounded-full m-2"
-            src="/images/cloud.jpg"
-            alt="cloud"
+            class="m-2 h-14 w-14 rounded-full"
+            src="images/cloud.jpg"
+            alt="Cloud logo"
           />
         </div>
-        <div class="flex items-center divide-violet-100 w-full">
-          <form
-            role="search"
-            action="/find"
-            method="get"
-            class="flex items-center"
+        <div
+          class="nav-links absolute left-0 top-[-100%] flex min-h-[20vh] w-full items-center rounded-lg bg-white px-5 duration-500 md:static md:min-h-fit md:w-auto md:bg-none md:p-2"
+        >
+          <ul
+            class="flex flex-col gap-8 md:flex-row md:items-center md:gap-[5vw]"
           >
-            <input
-              type="text"
-              placeholder="Search for an area..."
-              class="w-36 p-4 bg-slate-100 outline-violet-200 rounded-l-xl"
-            />
-            <input
-              type="submit"
-              class="cursor-pointer p-4 rounded-r-md transition-colors hover:bg-slate-100 bg-slate-50 bg-opacity-60"
-            />
-          </form>
-          <div
-            class="flex absolute justify-center w-full space-x-4 divide-black pl-4"
+            <li>
+              <a class="p-2 hover:bg-slate-300" href="">Home</a>
+            </li>
+            <li>
+              <a class="rounded-lg p-2 hover:bg-slate-300" href="">Dashboard</a>
+            </li>
+            <li>
+              <a class="rounded-lg p-2 hover:bg-slate-300" href="">Pricing</a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex items-center gap-6">
+          <button
+            class="rounded-full bg-slate-900 px-5 py-2 text-white hover:bg-slate-600"
           >
-            <button
-              class="hover:bg-slate-100 p-5 transition-colors bg-slate-50 bg-opacity-60 rounded-xl"
-            >
-              Home
-            </button>
-            <button
-              class="hover:bg-slate-100 p-5 transition-colors bg-slate-50 bg-opacity-60 rounded-xl"
-            >
-              Dashboard
-            </button>
-            <button
-              class="hover:bg-slate-100 p-5 transition-colors bg-slate-50 bg-opacity-60 rounded-xl"
-            >
-              Maps
-            </button>
-          </div>
+            Sign In
+          </button>
+          <ion-icon
+            onclick="onToggleMenu(this)"
+            class="cursor-pointer text-3xl md:hidden"
+            name="menu"
+          ></ion-icon>
         </div>
       </nav>
-    </div>
+    </header>
+    <script>
+      const navLinks = document.querySelector(".nav-links");
+      function onToggleMenu(e) {
+        console.log(e.name);
+        e.name = e.name === "menu" ? "close" : "menu";
+        navLinks.classList.toggle("top-[6%]");
+      }
+    </script>
   </body>
 </html>
