@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/output.css" />
   </head>
   <body>
-    <header class="bg-[#648499]">
+    <header class="bg-[#648499] bg-opacity-70">
       <nav class="mx-auto flex w-[92%] items-center justify-between">
         <div>
           <img
@@ -17,7 +17,7 @@
           />
         </div>
         <div
-          class="nav-links border-1 absolute left-0 top-[-100%] flex w-full items-center rounded-b-lg bg-[#648499] px-5 py-6 text-white duration-500 md:static md:min-h-fit md:w-auto md:scale-100 md:rounded-lg md:border-0 md:p-2 md:duration-500"
+          class="nav-links border-1 absolute left-0 top-[-100%] flex w-full items-center rounded-b-lg bg-none px-5 py-6 text-white filter backdrop-blur-md duration-500 md:static md:min-h-fit md:w-auto md:scale-100 md:rounded-lg md:border-0 md:p-2 md:duration-500"
         >
           <ul
             class="flex flex-col gap-8 md:flex-row md:items-center md:gap-[5vw]"
@@ -59,6 +59,8 @@
         console.log(e.name);
         e.name = e.name === "menu" ? "close" : "menu";
         navLinks.classList.toggle("top-[70px]");
+        navLinks.classList.toggle("bg-slate-300");
+        navLinks.classList.toggle("bg-opacity-10");
       }
     </script>
   </body>

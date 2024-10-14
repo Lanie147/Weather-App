@@ -10,12 +10,31 @@
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
     ></script>
   </head>
-  <body class="bg-[url('/images/bgFields.jpeg')] bg-cover bg-no-repeat">
+  <body
+    class="z-[1] min-h-[100vh] bg-[url('/images/bgFields.jpeg')] bg-cover bg-no-repeat"
+  >
     <%- include("./partials/header.ejs")%>
+
     <div
-      class="mx-auto mt-10 h-[40vh] w-[40vw] rounded-xl bg-gray-200 bg-opacity-30"
+      class="z-[2] mx-auto mb-3 mt-10 flex max-h-max max-w-max flex-col rounded-xl bg-[url('/images/sunbg.jpg')] bg-auto bg-right p-5"
     >
-      <div class="flex justify-center">hello</div>
+      <div class="mr-24 flex flex-col p-5 pt-5">
+        <div class="text-4xl font-bold">Monday</div>
+        <div class="text-base">14 Oct 2024</div>
+        <div class="text-xl font-bold">Southampton</div>
+      </div>
+      <div class="flex items-center p-5">
+        <img
+          class="animate-slow-grow-shrink h-16"
+          src="/images/sunicon.png"
+          alt="Sun"
+        />
+      </div>
+      <div class="mr-24 flex max-h-max max-w-max flex-col p-5 pt-5">
+        <div class="text-3xl font-bold">10*</div>
+        <div class="text-xl font-bold">Scattered clouds</div>
+      </div>
     </div>
+    <%- include("./partials/footer.ejs")%>
   </body>
 </html>
