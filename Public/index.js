@@ -1,10 +1,12 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import "dotenv/config";
+
 
 const app = express();
 const port = 3000;
-const authToken = "0e51510d053d293f793b1cdd93887cbc";
+const authToken = process.env.APIKEY;
 // const today = new Date();
 // const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday","Saturday"];
 // const day = daysOfWeek[today.getDay()];
