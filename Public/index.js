@@ -7,24 +7,17 @@ import "dotenv/config";
 const app = express();
 const port = 3000;
 const authToken = process.env.APIKEY;
-// const today = new Date();
-// const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday","Saturday"];
-// const day = daysOfWeek[today.getDay()];
-// console.log(daysOfWeek);
-const locationNames = {
-    chandlersford:{
-        lat: 50.995323,
-        lon: -1.369236
-    },
-    donkeys:{
-        lat: 50.627220,
-        lon: -1.225843
-    },
-    gosport:{
-        lat: 50.790797,
-        lon: -1.138200
-    },
+
+function getCurrentDate(){
+const currentDate = new Date()
+const options = {
+    weekday: "long",
+    day: "2-digit",
+    month: "short"
 }
+return currentDate.toLocaleDateString("en-GB", options)
+}
+console.log(getCurrentDate());
 
 
 
@@ -34,9 +27,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
     try{
-        const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${locationNames.chandlersford.lat}&lon=${locationNames.chandlersford.lon}&units=metric&exclude=minutely&appid=` + authToken)
+        const response = await axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=so53,GB&appid=${authToken}`)
         const result = response.data;
-        res.render("index.ejs", {data: result});
+        const lat = response.data.lat;
+        const lon = response.data.lon;
+        const responseCoord = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${authToken}`)
+        const resultcoord = responseCoord.data;
+        res.render("index.ejs", {data: resultcoord});
+        
     }
     catch (error) {
         console.error("Failed to make request:", error.message);
@@ -46,15 +44,33 @@ app.get("/", async (req, res) => {
     });
     }
 });
+// app.get("/", async (req, res) => {
+//     try{
+//         const responseCoord = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${authToken}`)
+//         const result = response.data;
+//         res.render("index.ejs", {data: result});
+//     }
+//     catch (error) {
+//         console.error("Failed to make request:", error.message);
+//         res.status(500);
+//         res.render("index.ejs", {
+//             error: error.message,
+//     });
+//     }
+// });
 
-app.post("/", async (req, res) => {
+app.post("/Search", async (req, res) => {
     try{
         const location = req.body.location;
-        console.log(location);
-        // const locationSelected = locationNames.donkeys.lat
-        const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${locationNames.chandlersford.lat}&lon=${locationNames.chandlersford.lon}&units=metric&exclude=minutely&appid=` + authToken)
+        const response = await axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${location},GB&appid=` + authToken)
         const result = response.data;
-        res.render("index.ejs", {data: result});
+        const lat = response.data.lat;
+        const lon = response.data.lon;
+        const responseCoord = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${authToken}`)
+        const resultcoord = responseCoord.data;
+        res.render("index.ejs", {data: resultcoord});
+
+        
     }
     catch (error) {
         console.error("Failed to make request:", error.message);
