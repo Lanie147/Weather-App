@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  experimental: {
+    optimizeUniversalDefaults: true
+},
   content: ["./views/*.ejs",
   ".public/*.js", "./views/partials/*.ejs"],
   theme: {
@@ -13,6 +16,9 @@ module.exports = {
       animation: {
         'slow-grow-shrink': 'grow-shrink 6s ease-in-out infinite', //animates over the course of 10 seconds
         'slow-spin': 'spin 60s linear infinite', // Custom slow spin animation
+      },
+      fontFamily:{
+        body: ['Poppins']
       },
     },
   },
