@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%if (locals.data){%>
+    <div class="flex items-center w-[100vw] justify-center">
+        <div>
+          <form action="/Search" id="form" method="post">
+            <select name="location" id="location-select"
+              class="rounded-lg bg-white bg-opacity-35 p-2 text-white outline-none">
+              <option class="text-black" hidden value=""><%=nameOfPlace%></option>            
+              <option class="text-black" value="so53">Chandlers Ford</option>
+              <option class="text-black" value="m2">Manchester</option>
+              <option class="text-black" value="po12">Gosport</option>
+              <option class="text-black" value="po38">Donkey Sanctuary</option>
+            </select>
+            <button type="submit" class="rounded-lg bg-slate-900 p-2 text-white">Go</button>
+          </form>
+        </div>
+      </div>
+      <%}%>
+      <%if (locals.error){%>
+      <div class="flex items-center justify-center">
+        <div>
+          <form action="/Search" id="form" method="post">
+            <select name="location" id="location-select"
+              class="rounded-lg bg-white bg-opacity-35 p-2 text-white outline-none">
+              <option class="text-black" hidden value="">Try another location</option>            
+              <option class="text-black" value="so53">Chandlers Ford</option>
+              <option class="text-black" value="m2">Manchester</option>
+              <option class="text-black" value="po12">Gosport</option>
+              <option class="text-black" value="po38">Donkey Sanctuary</option>
+            </select>
+            <button type="submit" class="rounded-lg bg-slate-900 p-2 text-white">Go</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%}%>
+</body>
+</html>
