@@ -11,30 +11,76 @@
     ></script>
   </head>
   <body
-    class="z-[1] min-h-[100vh] bg-[url('/images/bgFields.jpeg')] bg-cover bg-no-repeat"
+    class="font-body z-[1] min-h-[100vh] bg-[url('/images/bgFields.jpeg')] bg-cover bg-no-repeat"
   >
-    <%- include("./partials/header.ejs")%>
-
-    <div
-      class="z-[2] mx-auto mb-3 mt-10 flex max-h-max max-w-max flex-col rounded-xl bg-[url('/images/sunbg.jpg')] bg-auto bg-right p-5"
-    >
-      <div class="mr-24 flex flex-col p-5 pt-5">
-        <div class="text-4xl font-bold">Monday</div>
-        <div class="text-base">14 Oct 2024</div>
-        <div class="text-xl font-bold">Southampton</div>
-      </div>
-      <div class="flex items-center p-5">
-        <img
-          class="animate-slow-grow-shrink h-16"
-          src="/images/sunicon.png"
-          alt="Sun"
-        />
-      </div>
-      <div class="mr-24 flex max-h-max max-w-max flex-col p-5 pt-5">
-        <div class="text-3xl font-bold">10*</div>
-        <div class="text-xl font-bold">Scattered clouds</div>
+  <%if (locals.data) {%>
+    <div class="flex justify-center items-center w-[90vw] min-h-max mx-auto mt-5">
+      <div class="z-[2] mx-auto mb-3 flex border-2 border-opacity-80 border-white max-h-max min-h-[350px] max-w-[400px] min-w-[380px] flex-col filter backdrop-blur-lg rounded-xl p-5 text-white">
+        <div class=" flex flex-col p-5 pt-5">
+          <div class="text-4xl" id="place"><%=nameOfPlace%></div>
+          <div class="text-base" id="day"><%=day%></div>
+          <div class="text-xl" id="date"><%=date%></div>
+          <div class="text-xl" id="weather-main"><%=data.hourly[0].weather[0].main%></div>
+        </div>
+        <div class="flex">
+          <div class="flex max-h-max max-w-max flex-col p-5 pt-5">
+            <div class="text-3xl" id="temperature"><%=Math.round(data.hourly[0].temp)%>&deg;C</div>
+            <div class="text-xl font-thin" id="weather-desc"><%=data.hourly[0].weather[0].description%></div>
+          </div>
+          <div class="flex items-center">
+          <img id="weather-icon" class="h-24" src="https://openweathermap.org/img/wn/<%=icon%>.png" alt="icon">
+          </div>    
+        </div>
+        <div class="forecast flex overflow-scroll gap-1 rounded-lg">
+          <% for (let i = 1; i < 7; i++) { %>
+          <div class="day p-4 rounded-lg bg-white bg-opacity-5 min-h-[100px] min-w-[120px]">
+            <div class="dayname"><%=days[i]%></div>
+              <div>
+                <div class="temp"><%=Math.round(data.daily[i].temp.max)%>&deg;C</div>
+                <img id="weather-icon" class="h-12" src="https://openweathermap.org/img/wn/<%=data.daily[i].weather[0].icon%>.png" alt="icon">
+              </div>
+            <div class="weather"><%=data.daily[i].weather[0].main%></div>
+          </div>
+          <% } %>
+        </div>
+        <div class="flex items-center mt-2 justify-center">
+          <div>
+            <form action="/Search" id="form" method="post">
+              <select name="location" id="location-select" class="rounded-lg bg-white bg-opacity-35 p-2 text-white outline-none">
+                <option class="text-black" hidden value=""><%=nameOfPlace%></option>            
+                <option class="text-black" value="so53">Chandlers Ford</option>
+                <option class="text-black" value="m2">Manchester</option>
+                <option class="text-black" value="po12">Gosport</option>
+                <option class="text-black" value="po38">Donkey Sanctuary</option>
+              </select>
+              <button type="submit" class="rounded-lg bg-slate-900 p-2 text-white">Go</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-    <%- include("./partials/footer.ejs")%>
+  <%}%>
+  <%if (locals.error){%>
+    <div class="mr-24 flex flex-col p-5 pt-5">
+      <div class="text-4xl">Couldn't get data</div>
+      <div class="text-base font-thin">n/a</div>
+      <div class="text-xl font-thin"><%=error%></div>
+    </div>   
+    <div class="flex items-center justify-center">
+      <div>
+        <form action="/Search" id="form" method="post">
+          <select name="location" id="location-select"
+          class="rounded-lg bg-white bg-opacity-35 p-2 text-white outline-none">
+            <option class="text-black" hidden value="">Try another location</option>            
+            <option class="text-black" value="so53">Chandlers Ford</option>
+            <option class="text-black" value="m2">Manchester</option>
+            <option class="text-black" value="po12">Gosport</option>
+            <option class="text-black" value="po38">Donkey Sanctuary</option>
+          </select>
+          <button type="submit" class="rounded-lg bg-slate-900 p-2 text-white">Go</button>
+        </form>
+      </div>
+    </div>
+  <%}%>
   </body>
 </html>
