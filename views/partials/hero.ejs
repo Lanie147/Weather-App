@@ -7,24 +7,26 @@
     <link rel="stylesheet" href="/css/output.css" />
   </head>
 <body>
-    <div class="swiper-slide weather-slide flex mt-10 justify-center items-center mx-auto w-[100vw]">
+    <div class="flex mt-10 justify-center items-center mx-auto w-[100vw]">
         <div class="z-[2] mx-auto mb-3 flex border-2 border-opacity-80 border-white max-h-max min-h-[350px] max-w-[400px] min-w-[400px] flex-col filter backdrop-blur-lg rounded-xl p-5 text-white">
             <% if (locals.data){ %>
             <div class="mr-24 flex flex-col p-5 pt-5">
-                <div class="text-4xl"><%=nameOfPlace%></div>
-                <div class="text-base"><%=day%></div>
-                <div class="text-xl"><%=date%></div>
-                <div class="text-xl"><%=data.hourly[0].weather[0].main%></div>
+                <div id="place" class="text-4xl"><%=nameOfPlace%></div>
+                <div id="day" class="text-base"><%=day%></div>
+                <div id="date" class="text-xl"><%=date%></div>
+                <div id="weather-main" class="text-xl"><%=data.hourly[0].weather[0].main%></div>
             </div>
             <div class="flex">
                 <div class=" flex max-h-max max-w-max flex-col p-5 pt-5">
-                    <div class="text-3xl"><%=Math.round(data.hourly[0].temp)%>&deg;C</div>
-                    <div class="text-xl font-thin"><%=data.hourly[0].weather[0].main%></div>
+                    <div id="temperature" class="text-3xl"><%=Math.round(data.hourly[0].temp)%>&deg;C</div>
+                    <div id="weather-desc" class="text-xl font-thin"><%=data.hourly[0].weather[0].main%></div>
                 </div>
                 <div class="flex items-center">
-                    <img class="h-24" src="https://openweathermap.org/img/wn/<%=icon%>.png" alt="icon">
+                    <img id="weather-icon" class="h-24" src="https://openweathermap.org/img/wn/<%=icon%>.png" alt="icon">
                 </div>
             </div>
+            <button id="next-hour-btn" class="bg-blue-500 text-white p-2 mt-4 rounded">Next Hour</button>
+
         </div>
     <%}%>
     <%if (locals.error) {%>
@@ -36,4 +38,28 @@
         <%}%>
     </div>
 </body>
+<script>
+    let currentHourIndex = 0;
+    const hourlyData = JSON.stringify(data.hourly);  // Make the hourly data available for JavaScript
+
+    document.getElementById('next-hour-btn').addEventListener('click', () => {
+        currentHourIndex++;
+        if (currentHourIndex >= hourlyData.length) {
+            currentHourIndex = 0;  // Reset to 0 if it exceeds the available hours
+        }
+
+        // Update the temperature and weather details dynamically
+        const temperatureElement = document.getElementById('temperature');
+        const weatherMainElement = document.getElementById('weather-main');
+        const weatherDescElement = document.getElementById('weather-desc');
+        const weatherIconElement = document.getElementById('weather-icon');
+
+        const currentData = hourlyData[currentHourIndex];
+
+        temperatureElement.innerHTML = Math.round(currentData.temp) + '&deg;C';
+        weatherMainElement.innerHTML = currentData.weather[0].main;
+        weatherDescElement.innerHTML = currentData.weather[0].description;
+        weatherIconElement.src = `https://openweathermap.org/img/wn/${currentData.weather[0].icon}.png`;
+    });
+</script>
 </html>
